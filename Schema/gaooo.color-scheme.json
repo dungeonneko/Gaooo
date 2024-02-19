@@ -1,0 +1,63 @@
+{
+    "name": "Example Color Scheme",
+    "globals":
+    {
+        "background": "rgb(34, 34, 34)",
+        "foreground": "#EEEEEE",
+        "caret": "white"
+    },
+    "rules":
+    [
+        {
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "#888888"
+        },
+        {
+            "name": "Label",
+            "scope": "label",
+            "foreground": "#0000FF",
+            "background": "#DDDDFF",
+        },
+        {
+            "name": "Tag",
+            "scope": "entity.name.tag",
+            "foreground": "#448888",
+        },
+        {
+            "name": "TagName",
+            "scope": "keyword.control",
+            "foreground": "#0000AF",
+        },
+        {
+            "name": "TagParam",
+            "scope": "tagparam",
+            "foreground": "#444444",
+        },
+        {
+            "name": "ParamName",
+            "scope": "param.name",
+            "foreground": "#AF0000",
+        },
+        {
+            "name": "ParamEqual",
+            "scope": "param.eq",
+            "foreground": "#7F7F7F",
+        },
+        {
+            "name": "ParamVar",
+            "scope": "param.var",
+            "foreground": "#AF00AF",
+        },
+        {
+            "name": "ConstantNumeric",
+            "scope": "constant.numeric",
+            "foreground": "#AF00FF",
+        },
+        {
+            "name": "ConstantString",
+            "scope": "string.other",
+            "foreground": "#007F00",
+        },
+    ]
+}

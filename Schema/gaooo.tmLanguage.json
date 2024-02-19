@@ -1,0 +1,117 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "gaooo",
+  "patterns": [
+    {
+      "include": "#comment_line"
+    },
+    {
+      "include": "#label0"
+    },
+    {
+      "include": "#oneline_tag"
+    },
+    {
+      "include": "#oneline_eval"
+    },
+    {
+      "include": "#tag"
+    }
+  ],
+  "repository": {
+    "comment_line": {
+      "name": "comment.line",
+      "match": "^\\s*;.*$"
+    },
+    "label0": {
+      "name": "label",
+      "match": "^\\*[\\w\\-]+\\|?\\S*"
+    },
+    "label1": {
+      "name": "label",
+      "match": "^\\\\t\\*[\\w\\-]+\\|?\\S*"
+    },
+    "var_number": {
+      "name": "constant.numeric",
+      "match": "[\\w\\-\\/\\.]+"
+    },
+    "var_language": {
+      "name": "constant.language",
+      "match": "(true|false)"
+    },
+    "var_label": {
+      "name": "label",
+      "match": "\\*[\\w\\-]+"
+    },
+    "var_string": {
+      "name": "string.other",
+      "match": "\"[^\"]*\""
+    },
+    "var_ref": {
+      "name": "variable.parameter",
+      "match": "\\%[\\w\\-]+"
+    },
+    "param_wildcard": {
+      "name": "variable.parameter",
+      "match": "\\*"
+    },
+    "param_name": {
+      "name": "param.name",
+      "match": "(\\w+)"
+    },
+    "param_eq": {
+      "name": "param.eq",
+      "match": "="
+    },
+    "param_var": {
+      "name": "param.var",
+      "match": "(\"[^\"]*\"|[^\\]\\s]*)",
+      "patterns": [
+      	{"include": "#var_string"},
+      	{"include": "#var_label"},
+      //	{"include": "#var_ref"},
+      //	{"include": "#var_language"},
+      	{"include": "#var_number"}
+      ]
+    },
+    "oneline_tag": {
+      "name": "entity.name.tag",
+      "match": "^\\s*[@#].*$",
+      "captures": {
+        "1": {"patterns": [{"include": "#tag_name"}]},
+        "2": {"patterns": [{"include": "#tag_param"}]}
+      }
+    },
+    "oneline_eval": {
+      "name": "entity.name.tag",
+      "match": "^\\s*[\\|].*$"
+    },
+    "tag_name": {
+      "name": "keyword.control",
+      "match": "\\w+"
+    },
+    "tag_param": {
+      "__patterns": [
+        {
+          "name": "tagparam",
+          "match": "(\\w+)=(\"[^\"]*\"|[^\\]\\s]*)",
+          "captures": {
+            "1": {"include": "#param_name"},
+            "2": {"include": "#param_eq"},
+            "3": {"include": "#param_var"},
+          }
+        },
+        {"include": "#param_wildcard"}
+      ]
+    },
+    "tag": {
+      "name": "entity.name.tag",
+      "match": "\\[[^\\]]*\\]",
+      "captures": {
+        "1": {"patterns": [{"include": "#tag_name"}]},
+        "2": {"patterns": [{"include": "#tag_param"}]}
+      }
+    }
+  },
+  "scopeName": "source.ks"
+}

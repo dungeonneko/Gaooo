@@ -1,0 +1,94 @@
+syntax = "proto3";
+package gaooo_debugger;
+option csharp_namespace = "GaoooDebugger";
+
+// Common
+message EchoRequest {
+  string text = 1;
+}
+message EchoResponse {
+  string text = 1;
+}
+message Target {
+	string relpath = 1;
+	string label = 2;
+	int32 line = 3;
+}
+
+// Runtime
+service Runtime {
+  rpc Echo (EchoRequest) returns (EchoResponse) {}
+  rpc Run (RunRequest) returns (RunResponse) {}
+  rpc Pause (PauseRequest) returns (PauseResponse) {}
+  rpc StepOver (StepOverRequest) returns (StepOverResponse) {}
+  rpc StepIn (StepInRequest) returns (StepInResponse) {}
+  rpc StepOut (StepOutRequest) returns (StepOutResponse) {}
+  rpc Breakpoints (BreakpointsRequest) returns (BreakpointsResponse) {}
+}
+
+message RunRequest {
+  string filepath = 1;
+  int32 line = 2;
+}
+
+message	RunResponse {
+}
+
+message	PauseRequest {
+}
+
+message PauseResponse {
+}
+
+message StepOverRequest {
+}
+
+message StepOverResponse {
+}
+
+message	StepInRequest {}
+
+message	StepInResponse {}
+
+message StepOutRequest {}
+
+message StepOutResponse {}
+
+message BreakpointsRequest {
+  message Breakpoint {
+    int32 line = 1;
+  }
+  message BreakpointList {
+    repeated Breakpoint breakpoints = 1;
+  }
+  map<string, BreakpointList> breakpointsPerFile = 1;
+}
+
+message BreakpointsResponse {}
+
+
+// Editor
+service Editor {
+  rpc Echo (EchoRequest) returns (EchoResponse) {}
+  rpc Update (UpdateRequest) returns (UpdateResponse) {}
+  rpc Error (ErrorRequest) returns (ErrorResponse) {}
+}
+
+message UpdateRequest {
+  string relpath = 1;
+  int32 line = 2;
+  map<string, string> variables = 3;
+  map<string, string> locals = 4;
+  repeated Target callstack = 5;
+  bool paused = 6;
+}
+
+message UpdateResponse {
+}
+
+message ErrorRequest {
+  string message = 1;
+}
+
+message ErrorResponse {
+}
